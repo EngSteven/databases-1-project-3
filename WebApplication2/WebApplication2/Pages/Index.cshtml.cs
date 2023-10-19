@@ -31,11 +31,12 @@ namespace WebApplication2.Pages
             String localIP = "";
             host = Dns.GetHostEntry(Dns.GetHostName());
             Global.IP = host.AddressList[0].ToString();
-            if (!Global.sesion.Equals("")) { 
-                    LogOut();
-                    Console.WriteLine("Exception: 1234654987");
-            } 
-           // Global.sesion = "LPerez";
+            if (!Global.sesion.Equals(""))
+            {
+                LogOut();
+                Console.WriteLine("Exception: 1234654987");
+            }
+            // Global.sesion = "LPerez";
             Global.sesion = "";
             //Response.Redirect("/Pricipal");
 
@@ -48,8 +49,8 @@ namespace WebApplication2.Pages
             {
                 //String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
                 String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
-                
-                
+
+
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();                                      //Se abre la coneccion con la BD.
@@ -69,7 +70,7 @@ namespace WebApplication2.Pages
 
                         if (resultCode == 50001) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
                         {
-                            errorMessage = "Combinacion Usuario/Contraseña no encontrado.";
+                            errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
                             return;
                         }
                         else
@@ -87,7 +88,8 @@ namespace WebApplication2.Pages
 
         }
 
-        public void LogOut() {
+        public void LogOut()
+        {
             try
             {
                 String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
@@ -112,7 +114,7 @@ namespace WebApplication2.Pages
 
                         if (resultCode == 50001) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
                         {
-                            errorMessage = "Combinacion Usuario/Contraseña no encontrado.";
+                            errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
                             return;
                         }
                         else
@@ -128,23 +130,25 @@ namespace WebApplication2.Pages
                 Console.WriteLine("Exception: " + ex.ToString());
             }
         }
-        public void OnPost() {
+        public void OnPost()
+        {
             //Response.Redirect("/Pricipal");
             //return;
             Console.WriteLine("Exception: 9999  ");
             usuarioInfo.Usuario = Request.Form["Usuario"];
             usuarioInfo.Clave = Request.Form["Clave"];
 
-            
-            
 
-            if (usuarioInfo.Usuario.Equals("") || usuarioInfo.Clave.Equals("")) {
+
+
+            if (usuarioInfo.Usuario.Equals("") || usuarioInfo.Clave.Equals(""))
+            {
                 errorMessage = "Ambos campos deben ser rellenados.";
                 return;
             }
             try
             {
-                Console.WriteLine("Exception: No Funciono"+ usuarioInfo.Clave.ToString()+ usuarioInfo.Usuario.ToString());
+                Console.WriteLine("Exception: No Funciono" + usuarioInfo.Clave.ToString() + usuarioInfo.Usuario.ToString());
                 String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -164,13 +168,14 @@ namespace WebApplication2.Pages
                         command.ExecuteNonQuery();
 
                         int resultCode = (int)command.Parameters["@outResultCode"].Value;
-                        Console.WriteLine("Exception: :::"+ resultCode);
+                        Console.WriteLine("Exception: :::" + resultCode);
                         if (resultCode == 50001 || resultCode == 50005) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
                         {
-                            errorMessage = "Combinacion Usuario/Contraseña no encontrado.";
+                            errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
                             return;
                         }
-                        else {
+                        else
+                        {
                             Global.sesion = usuarioInfo.Usuario;
                             Response.Redirect("/Pricipal");
                         }
@@ -181,7 +186,7 @@ namespace WebApplication2.Pages
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }
-            
+
         }
     }
     public class UsuarioInfo                                                //Clase que equivaldra a las filas de la tabla para si manipulacion.

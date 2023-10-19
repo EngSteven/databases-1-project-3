@@ -1,0 +1,32 @@
+﻿@page
+@model PricipalModel
+
+<center>
+    <h3>Detalle Deducciones</h3>
+</center>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre Deduccion</th>
+            <th>Total Porcentaje</th>
+            <th>Monto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaArticulos)
+        {
+            <tr>
+                <td>@item.Codigo</td>
+                <td>@item.Nombre</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row mb-3">
+    <div class="col-sm text-start">
+        <a class="btn btn-primary" href="/Clientes/UsuarioEmpleado" role="button">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+</div>

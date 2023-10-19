@@ -1,0 +1,58 @@
+﻿@page
+@model PricipalModel
+
+<div class="row mb-3">
+    <div class="col-sm text-start">
+        <a class="btn btn-primary" href="/Clientes/UsuarioEmpleado" role="button">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+</div>
+
+<center>
+    <h3>Detalle Salario Bruto</h3>
+</center>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Dia</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Salida</th>
+            <th>Horas Ordinarias</th>
+            <th>Devengado</th>
+            <th>Horas Extras</th>
+            <th>Devengado</th>
+            <th>Horas Extras Dobles</th>
+            <th>Devengado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaArticulos)
+        {
+            <tr>
+                <td>@item.Codigo</td>
+                <td>@item.Nombre</td>
+            </tr>
+        }
+        <tr>
+            <td>Salario Bruto</td>
+            <td>Total Deduccion</td>
+            <td>Salario Neto</td>
+            <td>Horas Ordinarias</td>
+            <td>Monto Devengado</td>
+            <td>Horas Extras</td>
+            <td>Monto Devengado</td>
+            <td>Horas Extras Dobles</td>
+            <td>Monto Devengado</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div class="row mb-3">
+    <div class="col-sm text-start">
+        <a class="btn btn-primary" href="/Clientes/UsuarioEmpleado" role="button">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+</div>
