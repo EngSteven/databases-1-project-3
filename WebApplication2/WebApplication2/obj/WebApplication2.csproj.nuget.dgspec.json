@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\Tarea3\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {}
+    "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\GitHub\\Tarea3-Base-de-Datos\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\Tarea3\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {
+    "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\GitHub\\Tarea3-Base-de-Datos\\WebApplication2\\WebApplication2\\WebApplication2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\Tarea3\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+        "projectUniqueName": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\GitHub\\Tarea3-Base-de-Datos\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
         "projectName": "WebApplication2",
-        "projectPath": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\Tarea3\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+        "projectPath": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\GitHub\\Tarea3-Base-de-Datos\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
         "packagesPath": "C:\\Users\\yei-1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\Tarea3\\WebApplication2\\WebApplication2\\obj\\",
+        "outputPath": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\GitHub\\Tarea3-Base-de-Datos\\WebApplication2\\WebApplication2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yei-1\\AppData\\Roaming\\NuGet\\NuGet.Config",

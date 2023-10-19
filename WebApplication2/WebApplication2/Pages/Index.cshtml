@@ -1,13 +1,13 @@
 ﻿@page
-@model WebApplication2.Pages.Clientes.ModificarModel
+@model IndexModel
 @{
+    ViewData["Title"] = "Tarea";
 }
 
-<br />
+<br>
 <center>
-    <h2>Insertar Empleado</h2>
+    <h2>Bienvenido a Articulos</h2>
 </center>
-
 @if (Model.errorMessage.Length > 0)
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -18,67 +18,17 @@
 
 <form method="POST">
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Nombre</label>
+        <label class="col-sm-3 col-form-label text-right">Usuario: </label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Nombre" value="@Model.articulo.Nombre" />
+            <input type="text" class="form-control" name="Usuario" value="@Model.usuarioInfo.Usuario" />
         </div>
     </div>
-
-
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Tipo de identificación</label>
+        <label class="col-sm-3 col-form-label">Contraseña:</label>
         <div class="col-sm-6">
-            <select name="ClaseSeleccionada" size="1" style="width: 637px; height: 39px;">
-                <option>@Model.articulo.Clase</option>
-                @foreach (var item in Model.listaClaseArticulos)
-                {
-                    <option value="@item.Nombre">@item.Nombre</option>
-                }
-            </select>
+            <input type="password" class="form-control" name="Clave" value="@Model.usuarioInfo.Clave" />
         </div>
     </div>
-
-
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Valor de identificación</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="Precio" value="@Model.articulo.Precio" />
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Fecha de nacimiento</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="Precio" value="@Model.articulo.Precio" />
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Puesto</label>
-        <div class="col-sm-6">
-            <select name="ClaseSeleccionada" size="1" style="width: 637px; height: 39px;">
-                <option>@Model.articulo.Clase</option>
-                @foreach (var item in Model.listaClaseArticulos)
-                {
-                    <option value="@item.Nombre">@item.Nombre</option>
-                }
-            </select>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Departamento</label>
-        <div class="col-sm-6">
-            <select name="ClaseSeleccionada" size="1" style="width: 637px; height: 39px;">
-                <option>@Model.articulo.Clase</option>
-                @foreach (var item in Model.listaClaseArticulos)
-                {
-                    <option value="@item.Nombre">@item.Nombre</option>
-                }
-            </select>
-        </div>
-    </div>
-
 
 
     @if (Model.successMessage.Length > 0)
@@ -93,16 +43,9 @@
         </div>
     }
 
-
     <div class="row mb-3">
-        <div class="offset-sm-3 col-sm d-grid">
-            <button type="submit" class="btn-primary">OK</button>
+        <div class="offset-sm-3 col-sm-6 d-grid">
+            <button type="submit" class="btn-primary">Entrar</button>
         </div>
-        <div class="col-sm-3 d-grid">
-            <a class="btn btn-secondary" href="/Clientes/UsuarioAdmin" role="button">Cancel</a>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <input type="text" class="form-control" name="idArticulo" value="@Model.idArticulo" hidden />
     </div>
 </form>

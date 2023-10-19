@@ -66,7 +66,7 @@ namespace WebApplication2.Pages
 
                         //command.ExecuteNonQuery();
 
-                        int resultCode = (int)command.Parameters["@outResultCode"].Value;
+                        /*int resultCode = (int)command.Parameters["@outResultCode"].Value;
 
                         if (resultCode == 50001) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
                         {
@@ -77,7 +77,7 @@ namespace WebApplication2.Pages
                         {
                             Global.sesion = usuarioInfo.Usuario;
                             Response.Redirect("/Pricipal");
-                        }
+                        }*/
                     }
                 }
             }
