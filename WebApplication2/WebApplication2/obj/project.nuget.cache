@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UaDHBSr57vgxM99zMv++/I88F9zRuzCD4tAcE+3rYcNIC7LiijBOCXGzbcc++Q0BYiYXP2vSEX+ElY2Shzp6lg==",
+  "dgSpecHash": "+7ZQKBlWCxLQF+/tGnT1TZlz3MGTAEGkrAjH59HFh2eABmU7kimmxXbjNG/DBbShAc4yiAf2ccha9VapQnRdQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\GitHub\\Tarea3-Base-de-Datos\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+  "projectFilePath": "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\College\\Semestre 4\\BasesDatos1\\Tareas\\Tarea3\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yei-1\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\yei-1\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

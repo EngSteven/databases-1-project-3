@@ -23,7 +23,7 @@ namespace WebApplication2.Pages
         public List<UsuarioInfo> listaArticulos = new List<UsuarioInfo>();
         public UsuarioInfo usuarioInfo = new UsuarioInfo();
         public String successMessage = "";
-        public String XmlFilePath = "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\CARPETAS IMPORTANTES\\Lenguajes\\C#\\VisualStudio\\EjerciciosVarios\\Catagolos2.xml";
+        //public String XmlFilePath = "C:\\Users\\yei-1\\Dropbox\\PC\\Desktop\\CARPETAS IMPORTANTES\\Lenguajes\\C#\\VisualStudio\\EjerciciosVarios\\Catagolos2.xml";
 
         public void OnGet()
         {
@@ -39,61 +39,14 @@ namespace WebApplication2.Pages
             // Global.sesion = "LPerez";
             Global.sesion = "";
             //Response.Redirect("/Pricipal");
-
-
-
-            XDocument xmlDoc = XDocument.Load(XmlFilePath);
-            Console.WriteLine(xmlDoc);
-
-            try
-            {
-                //String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
-                String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
-
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();                                      //Se abre la coneccion con la BD.
-                    using (SqlCommand command = new SqlCommand("dbo.CargarDatos", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@inDatosXML", xmlDoc);
-
-                        SqlParameter resultCodeParam = new SqlParameter("@outResultCode", SqlDbType.Int);
-                        resultCodeParam.Direction = ParameterDirection.Output;
-                        command.Parameters.Add(resultCodeParam);
-
-                        //command.ExecuteNonQuery();
-
-                        /*int resultCode = (int)command.Parameters["@outResultCode"].Value;
-
-                        if (resultCode == 50001) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
-                        {
-                            errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
-                            return;
-                        }
-                        else
-                        {
-                            Global.sesion = usuarioInfo.Usuario;
-                            Response.Redirect("/Pricipal");
-                        }*/
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.ToString());
-            }
-
         }
 
         public void LogOut()
         {
             try
             {
-                String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
-
+                String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
+                
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();                                      //Se abre la coneccion con la BD.
@@ -134,11 +87,9 @@ namespace WebApplication2.Pages
         {
             //Response.Redirect("/Pricipal");
             //return;
-            Console.WriteLine("Exception: 9999  ");
+            //Console.WriteLine("Exception: 9999  ");
             usuarioInfo.Usuario = Request.Form["Usuario"];
             usuarioInfo.Clave = Request.Form["Clave"];
-
-
 
 
             if (usuarioInfo.Usuario.Equals("") || usuarioInfo.Clave.Equals(""))
@@ -149,13 +100,16 @@ namespace WebApplication2.Pages
             try
             {
                 Console.WriteLine("Exception: No Funciono" + usuarioInfo.Clave.ToString() + usuarioInfo.Usuario.ToString());
-                String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
-
+                String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
+                
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();                                      //Se abre la coneccion con la BD.
                     using (SqlCommand command = new SqlCommand("dbo.BuscarUsuario", connection))
                     {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        DataTable table = new DataTable();
+
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@inUsuario", usuarioInfo.Usuario);
@@ -165,19 +119,54 @@ namespace WebApplication2.Pages
                         SqlParameter resultCodeParam = new SqlParameter("@outResultCode", SqlDbType.Int);
                         resultCodeParam.Direction = ParameterDirection.Output;
                         command.Parameters.Add(resultCodeParam);
-                        command.ExecuteNonQuery();
 
-                        int resultCode = (int)command.Parameters["@outResultCode"].Value;
-                        Console.WriteLine("Exception: :::" + resultCode);
-                        if (resultCode == 50001 || resultCode == 50005) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
+                        adapter.SelectCommand = command;
+                        DataSet dataSet = new DataSet();
+                        adapter.Fill(dataSet);
+
+                        //Si el output de errores por DataSet es 0 (No hay problemas).
+                        if (dataSet.Tables[0].Rows[0][0].ToString().Equals("0"))
                         {
-                            errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
-                            return;
+                            int resultCode = 0;
+
+                            if (int.TryParse(dataSet.Tables[0].Rows[0][0].ToString(), out int parsedValue))
+                            {
+                                resultCode = parsedValue;
+                            }
+
+                            if (resultCode == 50001 || resultCode == 50005) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
+                            {
+                                errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
+                                return;
+                            }
+
+                            Global.sesion = usuarioInfo.Usuario;
+                            DataRow row = dataSet.Tables[1].Rows[0]; 
+
+                            usuarioInfo.Tipo = "" + row[0];
+                            Console.WriteLine("Tipo de usuario: " + usuarioInfo.Tipo);
+
+                            if (usuarioInfo.Tipo == "1")
+                            {
+                                Response.Redirect("/Clientes/UsuarioAdmin");
+                            }
+                            else
+                            {
+                                Global.sesion = usuarioInfo.Usuario;
+                                DataRow row2 = dataSet.Tables[2].Rows[0];
+                                Global.nombreUsuarioEmpleado = "" + row2[0];
+                                Global.docIdentificacionEmpleado = "" + row2[1];
+
+                                Console.WriteLine("Nombre empleado: " + Global.nombreUsuarioEmpleado);
+                                Console.WriteLine("Doc identidad empleado: " + Global.docIdentificacionEmpleado);
+
+                                Response.Redirect("/Clientes/UsuarioEmpleado");
+                            } 
                         }
                         else
                         {
-                            Global.sesion = usuarioInfo.Usuario;
-                            Response.Redirect("/Pricipal");
+                            errorMessage = "Error al cargar la lista de articulos.";
+                            return;
                         }
                     }
                 }
@@ -193,5 +182,6 @@ namespace WebApplication2.Pages
     {
         public String Usuario;
         public String Clave;
+        public String Tipo;
     }
 }
