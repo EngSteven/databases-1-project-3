@@ -184,4 +184,11 @@ namespace WebApplication2.Pages
         public String Clave;
         public String Tipo;
     }
+
+    public class  Empleado
+    {
+        public String Nombre;
+        public String Puesto;
+    }
+
 }
