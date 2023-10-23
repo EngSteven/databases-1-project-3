@@ -26,4 +26,5 @@ public static class Global {
     public static String IP = "";
     public static String nombreUsuarioEmpleado = "";
     public static String docIdentificacionEmpleado = "";
+    public static String idUsuarioEmpleado;
 }

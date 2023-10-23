@@ -187,8 +187,17 @@ namespace WebApplication2.Pages
 
     public class  Empleado
     {
+        public String Id;
         public String Nombre;
+        public String TipoDocIdentidad;
+        public String ValorDocIdentidad;
+        public String Departamento;
         public String Puesto;
+    }
+
+    public class Usuario
+    {
+
     }
 
 }

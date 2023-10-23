@@ -51,8 +51,10 @@ namespace WebApplication2.Pages.Clientes
                             foreach (DataRow row in dataSet.Tables[1].Rows) //Recorra cada fila de la tabla con los datos y estraigala en el tipo ClienteInfo.
                             {
                                 Empleado empleado = new Empleado();
-                                empleado.Nombre = "" + row[0];
-                                empleado.Puesto = "" + row[1];
+                                empleado.Id = "" + row[0];
+                                empleado.Nombre = "" + row[1];
+                                empleado.Puesto = "" + row[2];
+                                
                                 
                                 listaEmpleado.Add(empleado);             //Añadir cada fila al array para su visualizacion.
                             }
@@ -70,6 +72,35 @@ namespace WebApplication2.Pages.Clientes
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }
+        }
+
+        public void OnPost(string action, string idEmpleado)
+        {
+            Global.idUsuarioEmpleado = idEmpleado;
+
+            if (action == "Editar")
+            {
+                // Realiza la lógica para la acción de "Editar" aquí.
+                
+                Console.WriteLine("Boton editar");
+                Console.WriteLine("ID:" + idEmpleado);
+                Response.Redirect("/Clientes/Modificar");
+            }
+            else if (action == "Borrar")
+            {
+                // Realiza la lógica para la acción de "Borrar" aquí.
+                Console.WriteLine("Boton borrar");
+                Console.WriteLine("ID:" + idEmpleado);
+            }
+            else if (action == "Impersonar")
+            {
+                // Realiza la lógica para la acción de "Impersonar" aquí.
+                Console.WriteLine("Boton impersonar");
+                Console.WriteLine("ID:" + idEmpleado);
+            }
+
+            // Puedes acceder a la fila correspondiente y sus datos utilizando el valor de `id`.
+
         }
 
         public async Task OnPostFiltrar()
