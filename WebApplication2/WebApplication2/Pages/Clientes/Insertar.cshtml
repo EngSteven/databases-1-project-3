@@ -20,7 +20,7 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Nombre</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Nombre" value="@Model.articulo.Nombre" />
+            <input type="text" class="form-control" name="Nombre" value="@Model.empleado.Nombre" />
         </div>
     </div>
 
@@ -28,11 +28,10 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Tipo de identificación</label>
         <div class="col-sm-6">
-            <select name="ClaseSeleccionada" size="1" style="width: 637px; height: 39px;">
-                <option>@Model.articulo.Clase</option>
-                @foreach (var item in Model.listaClaseArticulos)
+            <select name="TipoDocIdentidad" size="1" style="width: 637px; height: 39px;">
+                @foreach (var item in Model.listaTipoDocIdentidad)
                 {
-                    <option value="@item.Nombre">@item.Nombre</option>
+                     <option value="@item">@item</option>
                 }
             </select>
         </div>
@@ -42,25 +41,24 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Valor de identificación</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Precio" value="@Model.articulo.Precio" />
+            <input type="text" class="form-control" name="ValorDocIdentidad" value="@Model.empleado.ValorDocIdentidad" />
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Fecha de nacimiento</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Precio" value="@Model.articulo.Precio" />
+            <input type="text" class="form-control" name="Precio" value="Vacio por el momento" />
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Puesto</label>
         <div class="col-sm-6">
-            <select name="ClaseSeleccionada" size="1" style="width: 637px; height: 39px;">
-                <option>@Model.articulo.Clase</option>
-                @foreach (var item in Model.listaClaseArticulos)
+            <select name="Puesto" size="1" style="width: 637px; height: 39px;">
+                @foreach (var item in Model.listaPuesto)
                 {
-                    <option value="@item.Nombre">@item.Nombre</option>
+                    <option value="@item">@item</option>
                 }
             </select>
         </div>
@@ -69,17 +67,14 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Departamento</label>
         <div class="col-sm-6">
-            <select name="ClaseSeleccionada" size="1" style="width: 637px; height: 39px;">
-                <option>@Model.articulo.Clase</option>
-                @foreach (var item in Model.listaClaseArticulos)
+            <select name="Departamento" size="1" style="width: 637px; height: 39px;">
+                @foreach (var item in Model.listaDepartamento)
                 {
-                    <option value="@item.Nombre">@item.Nombre</option>
+                    <option value="@item">@item</option>
                 }
             </select>
         </div>
     </div>
-
-
 
     @if (Model.successMessage.Length > 0)
     {

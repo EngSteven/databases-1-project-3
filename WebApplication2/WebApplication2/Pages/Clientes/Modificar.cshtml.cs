@@ -14,13 +14,9 @@ namespace WebApplication2.Pages.Clientes
         public List<String> listaTipoDocIdentidad = new List<String>();
         public List<String> listaPuesto = new List<String>();
         public List<String> listaDepartamento = new List<String>();
-        public String codigoIngresado = "";
         public String errorMessage = "";                                    //Variable para los mensajes de error
         public String successMessage = "";
-        public ArticuloInfo articulo = new ArticuloInfo();
         public Empleado empleado = new Empleado();
-        public int idArticulo = 0;
-        public String clase = "";
 
         public void OnGet()
         {
@@ -121,25 +117,26 @@ namespace WebApplication2.Pages.Clientes
 
                     connection.Open();
 
-                    /*if (articulo.Codigo.Length == 0 || articulo.Nombre.Length == 0 || articulo.Clase.Length == 0 || articulo.Precio.Length == 0)
+                    if (empleado.Nombre.Length == 0 || empleado.ValorDocIdentidad.Length == 0)
                     {
                         errorMessage = "Todos los datos son requeridos.";
                         return;
                     }
+
                     //Comprobar el formato
 
                     //Comprobar que el nombre solo contenga letras o guines
-                    if (!articulo.Nombre.All(c => (Char.IsLetter(c) || c == '-')))
+                    if (!empleado.Nombre.All(c => (Char.IsLetter(c) || c == ' ')))
                     {
-                        errorMessage = "El nombre solo puede contener letras o guines";
+                        errorMessage = "El nombre solo puede contener letras o espacios en blanco";
                         return;
                     }
                     //Comprobar que el precio solo contenga numeros o comas
-                    if (!articulo.Precio.All(c => (c >= '0' && c <= '9') || c == ','))
+                    if (!empleado.ValorDocIdentidad.All(c => (c >= '0' && c <= '9')) || empleado.ValorDocIdentidad.Length != 9)
                     {
-                        errorMessage = "El precio solo puede tener valores numéricos o coma";
+                        errorMessage = "El documento identidad solo debe contener 9 valores numéricos";
                         return;
-                    }*/
+                    }
 
                     using (SqlCommand command = new SqlCommand(spNombre, connection))
                     {
@@ -163,12 +160,10 @@ namespace WebApplication2.Pages.Clientes
                         int resultCode = (int)command.Parameters["@outResultCode"].Value;
                         if (resultCode == 50001) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
                         {
-                            errorMessage = "No puede actualizar documento identidad de empleado con un valor ya existente";
+                            errorMessage = "El valor documento identidad ingresado ya existe";
                             return;
                         }
                     }
-
-
                 }
 
             }

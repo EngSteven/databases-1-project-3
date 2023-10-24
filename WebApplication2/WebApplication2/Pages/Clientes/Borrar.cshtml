@@ -20,42 +20,42 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Nombre</label>
         <div class="col-sm-6">
-            <label class="col-sm-3 col-form-label">@Model.articulo.Codigo</label>
+            <label class="col-sm-3 col-form-label">@Model.empleado.Nombre</label>
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Tipo de identificación</label>
         <div class="col-sm-6">
-            <label class="col-sm-3 col-form-label">@Model.articulo.Nombre</label>
+            <label class="col-sm-3 col-form-label">@Model.empleado.TipoDocIdentidad</label>
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Valor de indentificación</label>
         <div class="col-sm-6">
-            <label class="col-sm-3 col-form-label">@Model.articulo.Clase</label>
+            <label class="col-sm-3 col-form-label">@Model.empleado.ValorDocIdentidad</label>
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Fecha de nacimiento</label>
         <div class="col-sm-6">
-            <label class="col-sm-3 col-form-label">@Model.articulo.Precio</label>
+            <label class="col-sm-3 col-form-label">Vacio de momento</label>
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Puesto</label>
         <div class="col-sm-6">
-            <label class="col-sm-3 col-form-label">@Model.articulo.Precio</label>
+            <label class="col-sm-3 col-form-label">@Model.empleado.Puesto</label>
         </div>
     </div>
 
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Departamento</label>
         <div class="col-sm-6">
-            <label class="col-sm-3 col-form-label">@Model.articulo.Precio</label>
+            <label class="col-sm-3 col-form-label">@Model.empleado.Departamento</label>
         </div>
     </div>
 
@@ -71,29 +71,18 @@
         </div>
     }
     <div class="row mb-3">
-        <div class="col-sm-3">
-            <label class="col-form-label">Confirmar</label>
+        <div class="col-sm text-start">
+            <button type="submit" class="btn btn-danger" style="width: 500px">Confirmar</button>
         </div>
-
-        <div class="col-sm">
-            <div class="col-sm text-end">
-                <button type="submit" class="btn btn-danger" style="width: 250px">OK</button>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <input type="text" class="form-control" name="Codigo1" value="@Model.articulo.Codigo" hidden />
     </div>
 </form>
 
+
 <form asp-page-handler="Confirmar" method="post">
-    <div class="col-sm">
-        <div class="col-sm text-end">
-            <button class="btn btn-primary" style="width: 250px" name="NoComfirmar" role="button">Cancel</button>
+    <div class="row mb-3">
+        <div class="col-sm text-start">
+            <button class="btn btn-primary" style="width: 500px" name="NoComfirmar" role="button">Cancel</button>
         </div>
-    </div>
-    <div class="col-sm-6">
-        <input type="text" class="form-control" name="Codigo1" value="@Model.articulo.Codigo" hidden />
     </div>
 </form>
 

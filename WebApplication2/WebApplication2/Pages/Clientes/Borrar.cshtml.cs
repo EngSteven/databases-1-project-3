@@ -8,37 +8,32 @@ namespace WebApplication2.Pages.Clientes
 {
     public class BorrarModel : PageModel
     {
-        public String codigoIngresado = "";
-        public String codigoBorrar = "";
         public String errorMessage = "";                                    //Variable para los mensajes de error
         public String successMessage = "";
-        public ArticuloInfo articulo = new ArticuloInfo();
+        public Empleado empleado = new Empleado();
 
 
         public void OnGet()
         {
             try
             {
-                codigoIngresado = TempData["CodigoIngresado"] as string;
-                String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
+                String SPNombre = "dbo.BuscarEmpleadoPorId";
+                String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();                                      //Se abre la coneccion con la BD.
-
-                    String SPNombre = "dbo.ObtenerArticuloPorClase";
-
                     using (SqlCommand command = new SqlCommand(SPNombre, connection))
                     {
                         //Variables para obtener el DataSet mandados de la BD.
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         DataTable table = new DataTable();
 
-
                         command.CommandType = CommandType.StoredProcedure;  //Indicar que el comando sera un SP.
-                        command.Parameters.AddWithValue("@inCodigo", codigoIngresado);
+                        command.Parameters.AddWithValue("@inIdEmpleado", int.Parse("" + Global.idUsuarioEmpleado));
                         command.Parameters.AddWithValue("@inUsuario", Global.sesion);
                         command.Parameters.AddWithValue("@inIP", Global.IP);
+
                         //Codigo para que detecte el output del SP.
                         SqlParameter resultCodeParam = new SqlParameter("@outResultCode", SqlDbType.Int);
                         resultCodeParam.Direction = ParameterDirection.Output;
@@ -57,12 +52,12 @@ namespace WebApplication2.Pages.Clientes
 
                             foreach (DataRow row in dataSet.Tables[1].Rows) //Recorra cada fila de la tabla con los datos y estraigala en el tipo ClienteInfo.
                             {
-                                articulo.Codigo = "" + codigoIngresado;
-                                articulo.Clase = "" + row[0];
-                                articulo.Nombre = "" + row[1];
-                                articulo.Precio = "" + SqlMoney.Parse(row[2].ToString());
+                                empleado.Nombre = "" + row[0];
+                                empleado.TipoDocIdentidad = "" + row[1];
+                                empleado.ValorDocIdentidad = "" + row[2];
+                                empleado.Puesto = "" + row[3];
+                                empleado.Departamento = "" + row[4];
                             }
-
                         }
                         else
                         {
@@ -82,15 +77,12 @@ namespace WebApplication2.Pages.Clientes
         public void OnPost() {
             try
             {
-                codigoBorrar = Request.Form["Codigo1"];
-                String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
+                String SPNombre = "dbo.BorrarEmpleado";
+                String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();                                      //Se abre la coneccion con la BD.
-
-                    String SPNombre = "dbo.BorradoLogico";
-
                     using (SqlCommand command = new SqlCommand(SPNombre, connection))
                     {
                         //Variables para obtener el DataSet mandados de la BD.
@@ -98,7 +90,7 @@ namespace WebApplication2.Pages.Clientes
                         DataTable table = new DataTable();
 
                         command.CommandType = CommandType.StoredProcedure;  //Indicar que el comando sera un SP.
-                        command.Parameters.AddWithValue("@inCodigo", codigoBorrar);
+                        command.Parameters.AddWithValue("@inID", int.Parse("" + Global.idUsuarioEmpleado));
                         command.Parameters.AddWithValue("@inUsuario", Global.sesion);
                         command.Parameters.AddWithValue("@inIP", Global.IP);
 
@@ -110,7 +102,7 @@ namespace WebApplication2.Pages.Clientes
 
 
                         int resultCode = (int)command.Parameters["@outResultCode"].Value;
-
+                        Console.WriteLine("outresultcode: " + resultCode);
                         if (resultCode != 50001)
                         {
                             Console.WriteLine("Borrado adecuado");
@@ -130,12 +122,12 @@ namespace WebApplication2.Pages.Clientes
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }
-            
+
         }
 
         public async Task OnPostConfirmar()
         {
-            try
+            /*try
             {
                 codigoBorrar = Request.Form["Codigo1"];
                 String connectionString = "Data Source=project0-server.database.windows.net;Initial Catalog=project0-database;Persist Security Info=True;User ID=stevensql;Password=Killua36911-";
@@ -172,8 +164,8 @@ namespace WebApplication2.Pages.Clientes
             {
                 errorMessage = ex.Message;
                 return;
-            }
-            Response.Redirect("/Pricipal");
+            }*/
+            Response.Redirect("/Clientes/UsuarioAdmin");
         }
     }
 }

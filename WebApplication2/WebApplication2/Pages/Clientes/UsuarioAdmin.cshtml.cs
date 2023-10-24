@@ -74,7 +74,7 @@ namespace WebApplication2.Pages.Clientes
             }
         }
 
-        public void OnPost(string action, string idEmpleado)
+        public void OnPostAccion(string action, string idEmpleado)
         {
             Global.idUsuarioEmpleado = idEmpleado;
 
@@ -91,23 +91,26 @@ namespace WebApplication2.Pages.Clientes
                 // Realiza la lógica para la acción de "Borrar" aquí.
                 Console.WriteLine("Boton borrar");
                 Console.WriteLine("ID:" + idEmpleado);
+                Response.Redirect("/Clientes/Borrar");
             }
             else if (action == "Impersonar")
             {
                 // Realiza la lógica para la acción de "Impersonar" aquí.
                 Console.WriteLine("Boton impersonar");
                 Console.WriteLine("ID:" + idEmpleado);
+                Response.Redirect("/Clientes/UsuarioEmpleado");
             }
 
             // Puedes acceder a la fila correspondiente y sus datos utilizando el valor de `id`.
 
         }
 
-        public async Task OnPostFiltrar()
+        public void OnPostFiltrar()
         {
             try
             {
                 Filtro = Request.Form["Filtrar"];
+                Console.WriteLine("Filtro: " + Filtro);
                 empleado = new Empleado();
 
                 String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
@@ -143,8 +146,9 @@ namespace WebApplication2.Pages.Clientes
                             foreach (DataRow row in dataSet.Tables[1].Rows) //Recorra cada fila de la tabla con los datos y estraigala en el tipo ClienteInfo.
                             {
                                 Empleado empleado = new Empleado();
-                                empleado.Nombre = "" + row[0];
-                                empleado.Puesto = "" + row[1];
+                                empleado.Id = "" + row[0];
+                                empleado.Nombre = "" + row[1];
+                                empleado.Puesto = "" + row[2];
 
                                 listaEmpleado.Add(empleado);             //Añadir cada fila al array para su visualizacion.
                             }

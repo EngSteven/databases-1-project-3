@@ -60,7 +60,7 @@
                 <td>@item.Nombre</td>
                 <td>@item.Puesto</td>
                 <td>
-                    <form method="post">
+                    <form asp-page-handler="Accion" method="post">
                         <input type="hidden" name="idEmpleado" value="@item.Id" />
                      
                         <button class="btn btn-success" name="action" value="Editar">Editar</button>

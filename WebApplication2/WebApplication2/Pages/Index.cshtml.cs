@@ -154,12 +154,9 @@ namespace WebApplication2.Pages
                             {
                                 Global.sesion = usuarioInfo.Usuario;
                                 DataRow row2 = dataSet.Tables[2].Rows[0];
-                                Global.nombreUsuarioEmpleado = "" + row2[0];
-                                Global.docIdentificacionEmpleado = "" + row2[1];
+                                Global.idUsuarioEmpleado = "" + row2[0];
 
-                                Console.WriteLine("Nombre empleado: " + Global.nombreUsuarioEmpleado);
-                                Console.WriteLine("Doc identidad empleado: " + Global.docIdentificacionEmpleado);
-
+                                Console.WriteLine("Id: " + Global.idUsuarioEmpleado);
                                 Response.Redirect("/Clientes/UsuarioEmpleado");
                             } 
                         }
