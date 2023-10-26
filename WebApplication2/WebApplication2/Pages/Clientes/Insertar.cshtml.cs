@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data;
 using System.Net;
+using System.Globalization;
+using System.Text;
 
 namespace WebApplication2.Pages.Clientes
 {
@@ -17,6 +19,10 @@ namespace WebApplication2.Pages.Clientes
         public String errorMessage = "";                                    //Variable para los mensajes de error
         public String successMessage = "";
         public Empleado empleado = new Empleado();
+
+        public static String[] caracteresDisponibles = { "0123456789", "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "@#!$*?" };
+        public String nombreUsuario = generarUsuarioEmpleado("Steven Sequeira", "305510755");
+        public String clave = generarClaveAleatoria(caracteresDisponibles);
 
         public void OnGet()
         {
@@ -127,9 +133,12 @@ namespace WebApplication2.Pages.Clientes
                         return;
                     }
 
+                    nombreUsuario = generarUsuarioEmpleado(empleado.Nombre, empleado.ValorDocIdentidad);
+                    clave = generarClaveAleatoria(caracteresDisponibles);
+
                     using (SqlCommand command = new SqlCommand(spNombre, connection))
                     {
-                        Console.WriteLine("Prueba insertar"); 
+                        Console.WriteLine("Prueba insertar");
                         command.CommandType = CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@inNombre", empleado.Nombre);
@@ -137,6 +146,8 @@ namespace WebApplication2.Pages.Clientes
                         command.Parameters.AddWithValue("@inValorDocIdentidad", empleado.ValorDocIdentidad);
                         command.Parameters.AddWithValue("@inPuesto", empleado.Puesto);
                         command.Parameters.AddWithValue("@inDepartamento", empleado.Departamento);
+                        command.Parameters.AddWithValue("@inUsuarioEmpleado", nombreUsuario);
+                        command.Parameters.AddWithValue("@inClaveEmpleado", clave);
                         command.Parameters.AddWithValue("@inUsuario", Global.sesion);
                         command.Parameters.AddWithValue("@inIP", Global.IP);
 
@@ -170,5 +181,66 @@ namespace WebApplication2.Pages.Clientes
             empleado.Departamento = "";
             Response.Redirect("/Exito");
         }
+
+        public static String generarClaveAleatoria(String[] disponibles)
+        {
+            String clave = "";
+            Random rand = new Random();
+            for (int i = 0; i < 6; i++)
+            {
+                int idTipoCaracter = rand.Next(0, 4);
+                String tipoCaracter = disponibles[idTipoCaracter];
+                int idCaracter = rand.Next(0, tipoCaracter.Length);
+                char caracter = tipoCaracter[idCaracter];
+                clave += caracter;
+            }
+            Console.WriteLine(clave);
+            return clave;
+        }
+
+        public static String quitarTildes(String texto)
+        {
+            StringBuilder textoNormalizado = new StringBuilder(texto.Length);
+
+            foreach (char c in texto)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                {
+                    textoNormalizado.Append(c);
+                }
+            }
+            return textoNormalizado.ToString();
+        }
+
+        public static String generarUsuarioEmpleado(String nombreCompleto, String valorDoc)
+        {
+            String[] separacion = nombreCompleto.Split(' ');
+            String nombre = separacion[0].Normalize(NormalizationForm.FormD);
+            String apellido = separacion[1].Normalize(NormalizationForm.FormD);
+            String nombreNormalizado = quitarTildes(nombre);
+            String apellidoNormalizado = quitarTildes(apellido);
+
+            if (nombreNormalizado.Length < 2)
+            {
+                nombreNormalizado += "ab";
+            }
+
+            if (apellidoNormalizado.Length < 4)
+            {
+                apellidoNormalizado += "abcd";
+            }
+
+
+            nombreNormalizado = nombreNormalizado.Substring(0, 2);
+            apellidoNormalizado = apellidoNormalizado.Substring(0, 4).ToLowerInvariant();
+            valorDoc = valorDoc.Substring(valorDoc.Length - 4);
+            String nombreUsuario = nombreNormalizado + apellidoNormalizado + valorDoc;
+
+            Console.WriteLine("Nombre: " + nombreNormalizado + "\nApellido: " + apellidoNormalizado + "\nValor documento: " + valorDoc);
+            Console.WriteLine("Nombre usuario: " + nombreUsuario);
+
+            return nombreUsuario;
+        }
+
     }
 }

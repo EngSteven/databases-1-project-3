@@ -79,30 +79,24 @@ namespace WebApplication2.Pages.Clientes
             Global.idUsuarioEmpleado = idEmpleado;
 
             if (action == "Editar")
-            {
-                // Realiza la lógica para la acción de "Editar" aquí.
-                
+            {                
                 Console.WriteLine("Boton editar");
                 Console.WriteLine("ID:" + idEmpleado);
                 Response.Redirect("/Clientes/Modificar");
             }
             else if (action == "Borrar")
             {
-                // Realiza la lógica para la acción de "Borrar" aquí.
                 Console.WriteLine("Boton borrar");
                 Console.WriteLine("ID:" + idEmpleado);
                 Response.Redirect("/Clientes/Borrar");
             }
             else if (action == "Impersonar")
             {
-                // Realiza la lógica para la acción de "Impersonar" aquí.
                 Console.WriteLine("Boton impersonar");
                 Console.WriteLine("ID:" + idEmpleado);
+                Global.mostrarBotonVA = true;
                 Response.Redirect("/Clientes/UsuarioEmpleado");
             }
-
-            // Puedes acceder a la fila correspondiente y sus datos utilizando el valor de `id`.
-
         }
 
         public void OnPostFiltrar()

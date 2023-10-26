@@ -7,6 +7,7 @@ namespace WebApplication2.Pages.Clientes
 {
     public class UsuarioEmpleadoModel : PageModel
     {
+        public bool mostrarBoton = Global.mostrarBotonVA;
         public List<ClaseArticulo> listaArticulos = new List<ClaseArticulo>();
         public String nombreUsuarioEmpleado = Global.nombreUsuarioEmpleado;
         public String docIdentificacionEmpleado = Global.docIdentificacionEmpleado;
@@ -68,7 +69,6 @@ namespace WebApplication2.Pages.Clientes
             {
                 Console.WriteLine("Exception: " + ex.ToString());
             }
-
         }
     }
 }

@@ -27,4 +27,5 @@ public static class Global {
     public static String nombreUsuarioEmpleado = "";
     public static String docIdentificacionEmpleado = "";
     public static String idUsuarioEmpleado;
+    public static bool mostrarBotonVA = true;
 }

@@ -27,6 +27,7 @@ namespace WebApplication2.Pages
 
         public void OnGet()
         {
+            Global.mostrarBotonVA = false;
             IPHostEntry host;
             String localIP = "";
             host = Dns.GetHostEntry(Dns.GetHostName());
