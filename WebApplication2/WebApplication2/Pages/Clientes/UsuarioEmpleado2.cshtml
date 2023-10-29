@@ -1,5 +1,5 @@
 ﻿@page
-@model WebApplication2.Pages.Clientes.UsuarioEmpleadoModel
+@model WebApplication2.Pages.Clientes.UsuarioEmpleadoModel2
 @{
 }
 
@@ -36,7 +36,7 @@
         </div>
         <div class="offset-sm-6 col-sm-3 d-grid">
             <a class="btn btn-primary" href="/Clientes/UsuarioEmpleado" role="button">
-                Planilla Semanal
+              Planilla Semanal
             </a>
         </div>
     </div>
@@ -44,7 +44,7 @@
         <div class="col-sm-3" style="display: flex; align-items: center;">
             <label class="col-sm-3 col-form-label">Identidad: </label>
             <div class="col-sm-6">
-                <label class="col-sm-3 col-form-label" >@Model.empleado.ValorDocIdentidad</label>
+                <label class="col-sm-3 col-form-label";>@Model.empleado.ValorDocIdentidad</label>
             </div>
         </div>
         <div class="offset-sm-6 col-sm-3 d-grid">
@@ -58,10 +58,10 @@
 
 
 <div class="row mb-3">
-    <div class="col-sm text-end">
+    <div class="col-sm text-end">   
         @if (@Model.mostrarBoton)
         {
-        <a class="btn btn-primary" href="/Clientes/UsuarioAdmin" role="button" style="width: 305px;">Volver Administrador</a>
+            <a class="btn btn-primary" href="/Clientes/UsuarioAdmin" role="button" style="width: 305px;">Volver Administrador</a>
         }
     </div>
 </div>
@@ -71,41 +71,26 @@
     <thead>
         <tr>
             <th><center>Salario Bruto</center></th>
-            <th></th>
             <th><center>Total Deduccion</center></th>
             <th></th>
             <th><center>Salario Neto</center></th>
-            <th><center>Horas Ordinarias</center></th>
-            <th><center>Horas Extras</center></th>
-            <th><center>Horas Extras Dobles</center></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.listaSemanaPlanilla)
+        @foreach (var item in Model.listaMesPlanilla)
         {
-            <tr>
+        <tr>
                 <td align="center">@item.Bruto</td>
-                <td>
-                    <form asp-page-handler="Accion" method="post">
-                        <input type="hidden" name="idSemanaP" value="@item.IdPlanilla" />
-                        <button class="btn btn-secondary" name="action" value="Detalles">Detalles</button>
-                    </form>
-                </td>
                 <td align="center">@item.TotalDeduc</td>
-                <td>
-                    <form asp-page-handler="Accion2" method="post">
-                        <input type="hidden" name="idSemanaP" value="@item.IdPlanilla" />
+            <td>
+                 <form asp-page-handler="Accion2" method="post">
+                        <input type="hidden" name="idMesP" value="@item.IdPlanillaM" />
                         <button class="btn btn-secondary" name="action" value="Detalles">Detalles</button>
-                    </form>
-                </td>
-                <td align ="center">@item.Neto</td>
-                <td align="center">@item.Ordinario</td>
-                <td align="center">@item.Extra</td>
-                <td align="center">@item.Doble</td>
-            </tr>
+                 </form>
+            </td>
+                <td align="center">@item.Neto</td>
+        </tr>
         }
 
     </tbody>
 </table>
-
-

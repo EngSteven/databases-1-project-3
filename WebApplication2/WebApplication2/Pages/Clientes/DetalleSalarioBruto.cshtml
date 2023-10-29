@@ -1,10 +1,11 @@
 ﻿@page
-@model PricipalModel
-
+@model WebApplication2.Pages.Clientes.DetalleSalarioBrutoModel
+<div class="row mb-3">
+</div>
 <div class="row mb-3">
     <div class="col-sm text-start">
         <a class="btn btn-primary" href="/Clientes/UsuarioEmpleado" role="button">
-            <i class="bi bi-arrow-left"></i> Volver
+            <i class="bi bi-arrow-left"></i>Volver
         </a>
     </div>
 </div>
@@ -15,44 +16,32 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Dia</th>
-            <th>Hora de Entrada</th>
-            <th>Hora de Salida</th>
-            <th>Horas Ordinarias</th>
-            <th>Devengado</th>
-            <th>Horas Extras</th>
-            <th>Devengado</th>
-            <th>Horas Extras Dobles</th>
-            <th>Devengado</th>
+            <th><center>Dia</center></th>
+            <th><center>Hora de Entrada</center></th>
+            <th><center>Hora de Salida</center></th>
+            <th><center>Horas Ordinarias</center></th>
+            <th><center>Devengado</center></th>
+            <th><center>Horas Extras</center></th>
+            <th><center>Devengado</center></th>
+            <th><center>Horas Extras Dobles</center></th>
+            <th><center>Devengado</center></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.listaArticulos)
+        @foreach (var item in Model.listaMarcasSemanaPlanilla)
         {
             <tr>
-                <td>@item.Codigo</td>
-                <td>@item.Nombre</td>
+                <td align="center">@item.Fecha</td>
+                <td align="center">@item.Inicio</td>
+                <td align="center">@item.Fin</td>
+                <td align="center">@item.QOrdinarias</td>
+                <td align="center">@item.MQOrdinarias</td>
+                <td align="center">@item.QExtra</td>
+                <td align="center">@item.MQExtra</td>
+                <td align="center">@item.QDoble</td>
+                <td align="center">@item.MQDoble</td>
             </tr>
         }
-        <tr>
-            <td>Salario Bruto</td>
-            <td>Total Deduccion</td>
-            <td>Salario Neto</td>
-            <td>Horas Ordinarias</td>
-            <td>Monto Devengado</td>
-            <td>Horas Extras</td>
-            <td>Monto Devengado</td>
-            <td>Horas Extras Dobles</td>
-            <td>Monto Devengado</td>
-        </tr>
-
     </tbody>
 </table>
 
-<div class="row mb-3">
-    <div class="col-sm text-start">
-        <a class="btn btn-primary" href="/Clientes/UsuarioEmpleado" role="button">
-            <i class="bi bi-arrow-left"></i> Volver
-        </a>
-    </div>
-</div>

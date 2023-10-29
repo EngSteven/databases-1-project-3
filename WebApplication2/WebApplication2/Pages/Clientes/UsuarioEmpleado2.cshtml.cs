@@ -6,10 +6,10 @@ using System.Data.SqlTypes;
 
 namespace WebApplication2.Pages.Clientes
 {
-    public class UsuarioEmpleadoModel : PageModel
+    public class UsuarioEmpleadoModel2 : PageModel
     {
-        public bool mostrarBoton = Global.mostrarBotonVA;   
-        public List<SemanaPlanilla> listaSemanaPlanilla = new List<SemanaPlanilla>();
+        public bool mostrarBoton = Global.mostrarBotonVA;
+        public List<MesPlanilla> listaMesPlanilla = new List<MesPlanilla>();
         public String nombreUsuarioEmpleado = Global.nombreUsuarioEmpleado;
         public String docIdentificacionEmpleado = Global.docIdentificacionEmpleado;
         public String errorMessage = "";
@@ -65,7 +65,7 @@ namespace WebApplication2.Pages.Clientes
                         }
                     }
                 }
-                SPNombre = "dbo.PlanSemanal";
+                SPNombre = "dbo.PlanMensual";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();                                      //Se abre la coneccion con la BD.
@@ -98,16 +98,13 @@ namespace WebApplication2.Pages.Clientes
 
                             foreach (DataRow row in dataSet.Tables[1].Rows) //Recorra cada fila de la tabla con los datos y estraigala en el tipo ClienteInfo.
                             {
-                                SemanaPlanilla PlanillaS = new SemanaPlanilla();
-                                PlanillaS.IdPlanilla = "" + row[0];                             
-                                PlanillaS.Bruto = "" + SqlMoney.Parse(row[1].ToString());
-                                PlanillaS.Neto = "" + SqlMoney.Parse(row[2].ToString());
-                                PlanillaS.TotalDeduc = "" + SqlMoney.Parse(row[3].ToString());
-                                PlanillaS.Ordinario = "" + row[4];
-                                PlanillaS.Extra = "" + row[5];
-                                PlanillaS.Doble = "" + row[6];
+                                MesPlanilla PlanillaM = new MesPlanilla();
+                                PlanillaM.IdPlanillaM = "" + row[0];
+                                PlanillaM.Bruto = "" + SqlMoney.Parse(row[1].ToString());
+                                PlanillaM.TotalDeduc = "" + SqlMoney.Parse(row[2].ToString());
+                                PlanillaM.Neto = "" + SqlMoney.Parse(row[3].ToString());
 
-                                listaSemanaPlanilla.Add(PlanillaS);
+                                listaMesPlanilla.Add(PlanillaM);
                             }
                         }
                         else
@@ -125,25 +122,13 @@ namespace WebApplication2.Pages.Clientes
             }
 
         }
-        public void OnPostAccion(string action, string idSemanaP)
+        public void OnPostAccion2(string action, string idMesP)
         {
-            Global.idSemanaPlanilla = idSemanaP;
-
-            Console.WriteLine("Boton Detalles Bruto");
-            Console.WriteLine("ID Semana:" + idSemanaP);
-            Response.Redirect("/Clientes/DetalleSalarioBruto");
-
-
-            // Puedes acceder a la fila correspondiente y sus datos utilizando el valor de `id`.
-
-        }
-        public void OnPostAccion2(string action, string idSemanaP)
-        {
-            Global.idSemanaPlanilla = idSemanaP;
+            Global.idMesPlanilla = idMesP;
 
             Console.WriteLine("Boton Detalles Deduccion");
-            Console.WriteLine("ID Semana:" + idSemanaP);
-            Response.Redirect("/Clientes/DetalleDeducciones");
+            Console.WriteLine("ID Mes:" + idMesP);
+            Response.Redirect("/Clientes/DetalleMesDeducciones");
 
 
             // Puedes acceder a la fila correspondiente y sus datos utilizando el valor de `id`.

@@ -4,10 +4,6 @@
 }
 
 <br>
-<center>
-    <h2>Administrador</h2>
-</center>
-
 
 @if (Model.errorMessage.Length > 0)
 {
@@ -16,6 +12,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
+<div class="row mb-3">
+    <div class="col-sm text-start">
+        <a class="btn btn-primary" href="/LogOut" role="button">
+            <i class="bi bi-arrow-left"></i>Cerrar Sesión
+        </a>
+    </div>
+</div>
+
+<center>
+    <h2>Administrador</h2>
+</center>
 <form asp-page-handler="Filtrar" method="post">
     <div class="row mb-3">
 
@@ -48,17 +56,17 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Puesto</th>
-            <th>Acción</th>
+            <th><center>Nombre</center></th>
+            <th><center>Puesto</center></th>
+            <th><center>Acción</center></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.listaEmpleado)
         {
             <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Puesto</td>
+                <td align="center">@item.Nombre</td>
+                <td align="center">@item.Puesto</td>
                 <td>
                     <form asp-page-handler="Accion" method="post">
                         <input type="hidden" name="idEmpleado" value="@item.Id" />

@@ -27,5 +27,8 @@ public static class Global {
     public static String nombreUsuarioEmpleado = "";
     public static String docIdentificacionEmpleado = "";
     public static String idUsuarioEmpleado;
+    public static String idSemanaPlanilla;
+    public static String idMesPlanilla;
     public static bool mostrarBotonVA = true;
+    public static String filtroEmpleado = "";
 }

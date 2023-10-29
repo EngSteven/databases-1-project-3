@@ -4,13 +4,12 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Data.SqlTypes;
 
-
 namespace WebApplication2.Pages.Clientes
 {
-    public class DetalleDeduccionesModel : PageModel
+    public class DetalleDeduccionesModel2 : PageModel
     {
         public List<DeducSemanaPlanilla> listaDeducSemanaPlanilla = new List<DeducSemanaPlanilla>();
-        public String idPlanilla = Global.idSemanaPlanilla.ToString();
+        public String idMesPlanilla = Global.idMesPlanilla.ToString();
         public String nombreUsuarioEmpleado = Global.nombreUsuarioEmpleado;
         public String docIdentificacionEmpleado = Global.docIdentificacionEmpleado;
         public String errorMessage = "";
@@ -20,7 +19,7 @@ namespace WebApplication2.Pages.Clientes
         {
             try
             {
-                String SPNombre = "dbo.DetallesSemanaPlanillaDeduc";
+                String SPNombre = "dbo.DetallesMesPlanillaDeduc";
                 String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
 
                 using SqlConnection connection = new SqlConnection(connectionString);
@@ -32,7 +31,7 @@ namespace WebApplication2.Pages.Clientes
                     DataTable table = new DataTable();
 
                     command.CommandType = CommandType.StoredProcedure;  //Indicar que el comando sera un SP.
-                    command.Parameters.AddWithValue("@inIdSemanaPlanilla", int.Parse(idPlanilla));
+                    command.Parameters.AddWithValue("@inIdMesPlanilla", int.Parse(idMesPlanilla));
                     //command.Parameters.AddWithValue("@inUsuario", Global.sesion);
                     //command.Parameters.AddWithValue("@inIP", Global.IP);
 
@@ -56,8 +55,7 @@ namespace WebApplication2.Pages.Clientes
                         {
                             DeducSemanaPlanilla DeducPlanillaS = new DeducSemanaPlanilla();
                             DeducPlanillaS.Nombre = "" + row[0];
-                            if (row[1] + "" == "0")
-                            {
+                            if (row[1]+"" == "0") {
                                 DeducPlanillaS.Porcentaje = "N/A";
                             }
                             else
@@ -87,4 +85,3 @@ namespace WebApplication2.Pages.Clientes
         }
     }
 }
-

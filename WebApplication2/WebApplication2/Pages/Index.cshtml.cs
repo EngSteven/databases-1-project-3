@@ -193,6 +193,51 @@ namespace WebApplication2.Pages
         public String Puesto;
     }
 
+    public class SemanaPlanilla                                               //Clase que equivaldra a las filas de la tabla para si manipulacion.
+    {
+        public String IdPlanilla;
+        public String Bruto;
+        public String TotalDeduc;
+        public String Neto;
+        public String Ordinario;
+        public String Extra;
+        public String Doble;
+
+    }
+
+    public class MesPlanilla                                               //Clase que equivaldra a las filas de la tabla para si manipulacion.
+    {
+        public String IdPlanillaM;
+        public String Bruto;
+        public String TotalDeduc;
+        public String Neto;
+
+    }
+
+
+
+    public class MarcasSemanaPlanilla                                               //Clase que equivaldra a las filas de la tabla para si manipulacion.
+    {
+        public String Fecha;
+        public String Inicio;
+        public String Fin;
+        public String QOrdinarias;
+        public String MQOrdinarias;
+        public String QExtra;
+        public String MQExtra;
+        public String QDoble;
+        public String MQDoble;
+
+    }
+
+    public class DeducSemanaPlanilla                                               //Clase que equivaldra a las filas de la tabla para si manipulacion.
+    {
+        public String Nombre;
+        public String Porcentaje;
+        public String Monto;
+
+    }
+
     public class Usuario
     {
 

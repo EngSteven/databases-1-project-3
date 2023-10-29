@@ -10,7 +10,7 @@ namespace WebApplication2.Pages.Clientes
     public class UsuarioAdminModel : PageModel
     {
         public String Nombre = "";
-        public String Filtro = "";
+        public String Filtro = Global.filtroEmpleado;
         public Empleado empleado = new Empleado();
         public List<Empleado> listaEmpleado = new List<Empleado>();
         public String errorMessage = "";
@@ -104,6 +104,7 @@ namespace WebApplication2.Pages.Clientes
             try
             {
                 Filtro = Request.Form["Filtrar"];
+                Global.filtroEmpleado = Filtro;
                 Console.WriteLine("Filtro: " + Filtro);
                 empleado = new Empleado();
 

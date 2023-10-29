@@ -7,6 +7,7 @@ namespace WebApplication2.Pages
     {
         public void OnGet()
         {
+            Global.filtroEmpleado = "";
         }
     }
 }
