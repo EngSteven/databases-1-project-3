@@ -56,16 +56,16 @@
 </form>
 
 
-
-<div class="row mb-3">
-    <div class="col-sm text-end">
-        @if (@Model.mostrarBoton)
-        {
-        <a class="btn btn-primary" href="/Clientes/UsuarioAdmin" role="button" style="width: 305px;">Volver Administrador</a>
-        }
+<form asp-page-handler="VolverAdmin" method="post">
+    <div class="row mb-3">
+        <div class="col-sm text-end">
+            @if (@Model.mostrarBoton)
+            {
+                <button class="btn btn-primary" style="width: 305px;">Volver Administrador</button>
+            }
+        </div>
     </div>
-</div>
-
+</form>
 
 <table class="table">
     <thead>

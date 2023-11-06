@@ -32,58 +32,12 @@ namespace WebApplication2.Pages
             String localIP = "";
             host = Dns.GetHostEntry(Dns.GetHostName());
             Global.IP = host.AddressList[0].ToString();
-            if (!Global.sesion.Equals(""))
-            {
-                LogOut();
-                Console.WriteLine("Exception: 1234654987");
-            }
             // Global.sesion = "LPerez";
             Global.sesion = "";
             //Response.Redirect("/Pricipal");
         }
 
-        public void LogOut()
-        {
-            try
-            {
-                String connectionString = "Data Source=pruebajose2312.database.windows.net;Initial Catalog=prueba2312;Persist Security Info=True;User ID=adminjose;Password=Bases1234";
-                
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();                                      //Se abre la coneccion con la BD.
-                    using (SqlCommand command = new SqlCommand("dbo.LogOut", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@inUsuario", Global.sesion);
-                        command.Parameters.AddWithValue("@inIP", Global.IP);
-
-                        SqlParameter resultCodeParam = new SqlParameter("@outResultCode", SqlDbType.Int);
-                        resultCodeParam.Direction = ParameterDirection.Output;
-                        command.Parameters.Add(resultCodeParam);
-
-                        command.ExecuteNonQuery();
-
-                        int resultCode = (int)command.Parameters["@outResultCode"].Value;
-
-                        if (resultCode == 50001) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
-                        {
-                            errorMessage = "Combinacion Usuario/Contrase?a no encontrado.";
-                            return;
-                        }
-                        else
-                        {
-                            Global.sesion = usuarioInfo.Usuario;
-                            Response.Redirect("/Pricipal");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.ToString());
-            }
-        }
+  
         public void OnPost()
         {
             //Response.Redirect("/Pricipal");
