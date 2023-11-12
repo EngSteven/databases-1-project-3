@@ -112,7 +112,7 @@ namespace WebApplication2.Pages.Clientes
                         else
                         {
                             //En caso de que haya algun error al cargar la tabla de articulos.
-                            errorMessage = "Error al borrar el articulo.";
+                            errorMessage = "Error al borrar el empleado.";
                             return;
                         }
                     }

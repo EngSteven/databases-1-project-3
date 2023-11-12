@@ -82,12 +82,12 @@ namespace WebApplication2.Pages
                         //Si el output de errores por DataSet es 0 (No hay problemas).
                         if (dataSet.Tables[0].Rows[0][0].ToString().Equals("0"))
                         {
-                            int resultCode = 0;
+                            int resultCode = (int)command.Parameters["@outResultCode"].Value;
 
-                            if (int.TryParse(dataSet.Tables[0].Rows[0][0].ToString(), out int parsedValue))
+                            /*if (int.TryParse(dataSet.Tables[0].Rows[0][0].ToString(), out int parsedValue))
                             {
                                 resultCode = parsedValue;
-                            }
+                            }*/
 
                             if (resultCode == 50001 || resultCode == 50005) //codigo generado en el SP que dice si ya un nombre del articulo existe o no
                             {
