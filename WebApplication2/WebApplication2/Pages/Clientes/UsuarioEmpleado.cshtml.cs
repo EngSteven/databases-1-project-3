@@ -31,6 +31,7 @@ namespace WebApplication2.Pages.Clientes
                         DataTable table = new DataTable();
 
                         command.CommandType = CommandType.StoredProcedure;  //Indicar que el comando sera un SP.
+                        command.Parameters.AddWithValue("@inIdTipoEvento", 12);
                         command.Parameters.AddWithValue("@inIdEmpleado", int.Parse("" + Global.idUsuarioEmpleado));
                         command.Parameters.AddWithValue("@inUsuario", Global.sesion);
                         command.Parameters.AddWithValue("@inIP", Global.IP);
